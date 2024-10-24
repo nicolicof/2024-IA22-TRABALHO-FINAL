@@ -1,7 +1,10 @@
-import { Router } from "express"
+import { Router, json } from "express"
 import staticRouter from "./static"
-// import tokenRouter from "./token"
+import tokenRouter from "./token"
+import userRouter from "./user"
 const router = Router()
+router.use(json())
 router.use("/", staticRouter)
-// router.post("/token", tokenRouter)
+router.use("/token", tokenRouter)
+router.use("/user", userRouter)
 export default router

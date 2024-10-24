@@ -1,0 +1,11 @@
+POST http://localhost:3000/token HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "qwe@qwe.qwe",
+  "password": "qwe"
+}
+
+###
+GET http://localhost:3000/user HTTP/1.1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6InF3ZSIsImVtYWlsIjoicXdlQHF3ZS5xd2UiLCJwYXNzd29yZCI6InF3ZSIsImlhdCI6MTcyODU3MDAzNiwiZXhwIjoxNzI4NTcwMDM2fQ.nQx1JIYen27cfBgwotd6FB9TJH8YdPQer8HMLd6RF8Qb
