@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/style.css">
+	<title>Perfil</title>
+	<style>
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-content {
+			background-color: #fff;
+			margin: 10% auto;
+			padding: 20px;
+			width: 300px;
+			border-radius: 8px;
+		}
+
+		.modal input {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+
+		.modal button {
+			padding: 10px;
+			margin: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.modal button.cancel {
+			background-color: #f44336;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="header">
+			<a href="acesso-privado.html">DarkHub</a>
+		</div>
+	</header>
+	<main>
+		<button id="editar-dados">Editar</button>
+		<button id="logout-btn">Sair</button>
+		<button id="delete-btn">Auto-Kill</button>
+	</main>
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<h3>Editar Dados</h3>
+			<input type="text" id="nome" name="nome" placeholder="Novo Nome" required>
+			<input type="email" id="email" name="email" placeholder="Novo E-mail" required>
+			<input type="password" id="senha" name="senha" placeholder="Nova Senha" required>
+			<button id="save-btn">Salvar</button>
+			<button class="cancel" id="cancel-btn">Cancelar</button>
+		</div>
+	</div>
+	<script>
+		if (!localStorage.getItem('token'))
+			return window.location = '/'
+		const editarBtn = document.getElementById('editar-dados');
+		const modal = document.getElementById('modal');
+		const cancelBtn = document.getElementById('cancel-btn');
+		const saveBtn = document.getElementById('save-btn');
+
+		function openModal() {
+			modal.style.display = 'block';
+		}
+
+		function closeModal() {
+			modal.style.display = 'none';
+		}
+
+		editarBtn.addEventListener('click', openModal);
+		cancelBtn.addEventListener('click', closeModal);
+
+		saveBtn.addEventListener('click', async () => {
+			const nome = document.getElementById('nome').value;
+			const email = document.getElementById('email').value;
+			const senha = document.getElementById('senha').value;
+
+			if (nome && email && senha) {
+				const url = '/user/update'
+				const method = 'PUT'
+				const headers = {
+					'Authorization': `${localStorage.getItem('token')}`,
+					'Content-Type': 'application/json'
+				}
+				const body = JSON.stringify({
+					userid,
+					nome,
+					email,
+					senha
+				})
+				const response = await fetch(url, { method, headers, body })
+				const dataResponse = await response.json()
+
+				if (response.ok) {
+					alert('Dados atualizados com sucesso!');
+					closeModal();
+				}
+				else {
+					alert('Erro ao atualizar dados');
+				}
+			} else {
+				alert('Por favor, preencha todos os campos!');
+			}
+		});
+
+		document.getElementById('logout-btn').addEventListener('click', () => {
+			localStorage.clear()
+			window.location.href = '/'
+		});
+
+		document.getElementById('delete-btn').addEventListener('click', () => {
+			if (confirm('Você tem certeza que deseja excluir sua conta?')) {
+				fetch('/delete-account', { method: 'DELETE' }).then(response => {
+					if (response.ok) {
+						alert('Conta excluída com sucesso!')
+						localStorage.clear()
+						window.location.href = 'acesso-publico.html'
+					}
+				})
+			}
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+@import url(./global.css);
+
+@import url(./elementos/header.css);
+
+@import url(./paginas/index.css);
+@import url(./paginas/privado.css);

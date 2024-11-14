@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/style.css">
+	<title>Player</title>
+</head>
+
+<body>
+	<header>
+		<div class="header header-x">
+			<a href="acesso-privado.html">DarkHub</a>
+			<div>
+				<a href="./profile.html">Perfil</a>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="player-container">
+			<h1 id="movie-title"></h1>
+			<div class="video-player">
+				<video id="movie-player" width="600" controls>
+					<source src="" type="video/mp4">
+				</video>
+			</div>
+			<div class="movie-actions">
+				<button id="like-button">Curtir</button>
+				<button id="dislike-button">Descurtir</button>
+				<button id="favorite-button">Favoritar</button>
+			</div>
+			<div id="movie-details"></div>
+			<div id="comments-section">
+				<h2>Comentários</h2>
+				<div id="comments-list"></div>
+				<input type="text" id="comment-input" placeholder="Escreva seu comentário...">
+				<button id="send-comment-button">Enviar Comentário</button>
+			</div>
+		</div>
+	</main>
+	<script>
+		const movieId = localStorage.getItem('movieId')
+		const movieName = localStorage.getItem('movieName')
+
+		if (!movieId || !movieName)
+			window.location = 'acesso-privado.html'
+
+		console.log(`Filme ID: ${movieId}, Nome: ${movieName}`)
+		const movieDetails = document.getElementById('movie-details')
+		movieDetails.innerHTML = `<p><strong>ID:</strong> ${movieId}</p><p><strong>Nome:</strong> ${movieName}</p>`
+		document.getElementById('movie-title').innerText = movieName
+
+		const commentInput = document.getElementById('comment-input');
+		const sendCommentButton = document.getElementById('send-comment-button');
+		const commentsList = document.getElementById('comments-list');
+
+		async function loadComments() {
+			const url = `/user/comments?movieId=${movieId}`
+			const method = 'GET'
+			const headers = { 'Authorization': `${localStorage.getItem('token')}` }
+			const response = await fetch(url, { method, headers })
+			const comments = await response.json()
+			commentsList.innerHTML = ''
+			comments.forEach(comment => {
+				const commentDiv = document.createElement('div')
+				commentDiv.classList.add('comment')
+				commentDiv.innerText = comment.content
+				commentsList.appendChild(commentDiv)
+			})
+		} loadComments()
+
+		sendCommentButton.addEventListener('click', async () => {
+			const commentText = commentInput.value.trim()
+			if (commentText === '') return
+			const url = '/user/comments'
+			const method = 'POST'
+			const headers = {
+				'Authorization': `${localStorage.getItem('token')}`,
+				'Content-Type': 'application/json'
+			}
+			const body = JSON.stringify({
+				movieId,
+				content: commentText,
+				userId: 1
+			})
+			const response = await fetch(url, { method, headers, body })
+			commentInput.value = ''
+			if (response.ok) loadComments()
+		})
+
+		window.addEventListener('beforeunload', () => {
+			localStorage.removeItem('movieId')
+			localStorage.removeItem('movieName')
+		})
+	</script>
+</body>
+
+</html>

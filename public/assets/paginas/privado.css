@@ -1,0 +1,63 @@
+.filmes-container {
+	display: flex;
+	padding-top: 32px;
+	flex-direction: row;
+	gap: 12px;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	background-color: aquamarine;
+}
+
+.filmes-container > div {
+	display: flex;
+	padding: 8px;
+	gap: 8px;
+	flex-direction: column;
+	width: 220px;
+	height: 320px;
+	border: 1px solid greenyellow;
+	background-color: rgb(129, 77, 77);
+}
+
+.filmes-container > div .img-filme {
+	flex-grow: 1;
+	background-color: rgb(40, 59, 53);
+}
+
+.filmes-container > div .filme-info {
+	display: grid;
+	background: purple;
+	row-gap: 8px;
+	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 1fr 1fr;
+}
+
+.filme-info p {
+	font-size: 16px;
+	font-weight: bold;
+	grid-column: 1;
+	font-family: monospace;
+	grid-row: 1;
+	color: chartreuse;
+	line-height: 20px;
+}
+
+.filme-info .filme-duration {
+	grid-column: 2;
+	justify-self: end;
+	font-size: 16px;
+	line-height: 20px;
+	color: rgb(251, 10, 194);
+	font-family: monospace;
+	grid-row: 1;
+}
+
+.filme-info .filme-user {
+	grid-column: 1/-1;
+	font-size: 14px;
+	font-family: monospace;
+	color: white;
+	line-height: 16px;
+	grid-row: 2;
+}
