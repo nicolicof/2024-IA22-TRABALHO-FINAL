@@ -58,8 +58,26 @@ export const refreshToken: RequestHandler = async (req, res, next) => {
   }
 }
 
+export const decodeToken: RequestHandler = async (req, res, next) => {
+  const token = req.headers.authorization
+  if (!token) {
+    res.status(401).json({ error: "Token not provided" })
+    return
+  }
+
+  try {
+    const decoded = await verify(token)
+    res.locals.user = decoded
+    next()
+  } catch (error) {
+    console.error(error)
+    res.status(401).json({ error: "ERROR TO DECODE" })
+  }
+}
+
 export default {
   createToken,
   checkToken,
-  refreshToken
+  refreshToken,
+  decodeToken
 }

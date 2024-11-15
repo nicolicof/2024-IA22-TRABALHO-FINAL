@@ -7,13 +7,10 @@ let instance: Database | null = null
 export async function connect() {
   if (instance) return instance
 
-
   const db = await open({
     filename: 'database.sqlite',
     driver: sqlite3.Database
   })
-
-  await db.exec('PRAGMA busy_timeout = 5000')
 
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -43,10 +40,9 @@ export async function connect() {
       user_id INTEGER,
       content TEXT NOT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      parent_comment_id INTEGER,
       FOREIGN KEY (movie_id) REFERENCES movies(id),
       FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (parent_comment_id) REFERENCES comments(id)
+      UNIQUE (movie_id, user_id, content)
     )
   `)
 
@@ -57,41 +53,19 @@ export async function connect() {
   `)
 
   await db.exec(`
-    INSERT OR IGNORE INTO movies (title, duration, inserted_by) VALUES 
-      ('Inception', 148, 1),
-      ('The Matrix', 136, 1),
-      ('Interstellar', 169, 1)
+    INSERT OR REPLACE INTO movies (title, duration, inserted_by) VALUES 
+      ('A Origem', 228, 1),
+      ('Matrix', 216, 1),
+      ('Interestelar', 249, 1)
   `)
 
   await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content) VALUES 
-      (1, 1, 'Amazing movie, so many layers to think about!')
-  `)
+    INSERT OR REPLACE INTO comments (movie_id, user_id, content) VALUES 
+      (1, 1, 'filme ruim da peste'),
+      (2, 1, 'o Neo não sabe typescript'),
+      (3, 1, 'a terra é plana gente, só aceita')
+  `);
 
-  await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content, parent_comment_id) VALUES 
-      (1, 1, 'I totally agree with myself. Each watch reveals something new!', 1)
-  `)
-
-  await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content) VALUES 
-      (2, 1, 'The Matrix is a timeless classic!')
-  `)
-
-  await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content, parent_comment_id) VALUES 
-      (2, 1, 'Can’t believe how relevant it still is today!', 2)
-  `)
-
-  await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content) VALUES 
-      (3, 1, 'Interstellar blew my mind with its science and visuals.')
-  `)
-
-  await db.exec(`
-    INSERT INTO comments (movie_id, user_id, content, parent_comment_id) VALUES 
-      (3, 1, 'The black hole scene was unforgettable!', 3)
-  `)
 
   instance = db
   return db

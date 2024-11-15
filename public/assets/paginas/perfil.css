@@ -1,0 +1,157 @@
+#dados {
+	margin-bottom: 12px;
+	color: hsl(0, 0%, 75%);
+	border-radius: 12px;
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	padding: 12px;
+}
+
+#nameBtn,
+#passBtn,
+#logoutBtn,
+#deleteBtn {
+	width: 300px;
+	padding: 12px;
+	color: hsl(0, 0%, 90%);
+	border-radius: 12px;
+	font-size: 16px;
+	line-height: 20px;
+	background-color: hsl(0, 0%, 10%);
+	border: 1px solid hsl(0, 0%, 14%);
+	margin-bottom: 8px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+#deleteBtn {
+	background-color: hsl(0, 100%, 50%);
+	border: 1px solid hsl(0, 100%, 54%);
+}
+
+#nameBtn:hover,
+#passBtn:hover,
+#logoutBtn:hover {
+	background-color: hsl(0, 0%, 12%);
+	border: 1px solid hsl(0, 0%, 16%);
+}
+
+#deleteBtn:hover {
+	background-color: hsl(0, 100%, 52%);
+	border: 1px solid hsl(0, 100%, 58%);
+}
+
+#nameBtn:active,
+#passBtn:active,
+#logoutBtn:active {
+	background-color: hsl(0, 0%, 14%);
+	border: 1px solid hsl(0, 0%, 18%);
+}
+
+#deleteBtn:active {
+	background-color: hsl(0, 100%, 54%);
+	border: 1px solid hsl(0, 100%, 60%);
+}
+
+#nameModal, #passModal {
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	height: 100%;
+	background-color: #0000009f;
+}
+
+#nameModal h3, #passModal h3 {
+	color: white;
+	font-size: 24px;
+	line-height: 28px;
+	margin-bottom: 12px;
+}
+
+#nameModal > div,
+#passModal > div {
+	max-width: 300px;
+	width: 100%;
+	padding: 18px;
+	background-color: #0f0f0f;
+	display: flex;
+	flex-direction: column;
+	border-radius: 12px;
+	margin: auto;
+}
+
+#nameModal input,
+#passModal input {
+	width: 100%;
+	padding: 10px 14px;
+	color: white;
+	font-size: 16px;
+	line-height: 20px;
+	margin: 10px 0;
+	background-color: hsl(0, 0%, 16%);
+	border: 1px solid hsl(0, 0%, 18%);
+	border-radius: 8px;
+}
+
+#nameModal input:hover,
+#passModal input:hover,
+#nameModal input:focus,
+#passModal input:focus {
+	outline: 1px solid red;
+}
+
+#nameModal button,
+#passModal button {
+	padding: 10px;
+	margin-top: 12px;
+	border-radius: 8px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+	background-color: red;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#nameModal button:hover,
+#passModal button:hover {
+	background-color: hsl(0, 100%, 45%);
+}
+
+#nameModal button:active,
+#passModal button:active {
+	background-color: hsl(0, 100%, 40%);
+}
+
+
+#nameModal button:first-of-type,
+#passModal button:first-of-type {
+	background-color: transparent;
+	border-color: transparent;
+	line-height: 20px;
+	display: flex;
+	margin: 0;
+	align-items: center;
+	font-weight: 800;
+	align-self: flex-end;
+	justify-self: flex-end;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 12px;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#nameModal button:first-of-type:hover,
+#passModal button:first-of-type:hover {
+	background-color: white;
+	color: black;
+}

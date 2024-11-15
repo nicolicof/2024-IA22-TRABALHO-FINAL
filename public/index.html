@@ -47,7 +47,7 @@
       if (!verifyMail(form.email.value))
         return alert('Email inválido')
 
-      const url = '/user/login'
+      const url = '/token/create'
       const method = 'POST'
       const headers = { 'Content-Type': 'application/json' }
       const body = JSON.stringify({
@@ -59,8 +59,6 @@
       const dataResponse = await response.json()
 
       if (!response.ok) {
-        console.log(response)
-        console.log(dataResponse)
         alert('Erro ao logar o usuário')
         return
       }

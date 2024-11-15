@@ -13,7 +13,9 @@
     <div class="header header-x">
       <a href="acesso-privado.html">DarkHub</a>
       <div>
-        <a href="./profile.html">Perfil</a>
+        <a href="./profile.html" class="photo">
+          <img src="icon/profile.png">
+        </a>
       </div>
     </div>
   </header>
@@ -23,7 +25,6 @@
   </main>
 </body>
 <script>
-  console.log(localStorage.getItem('token'))
   if (!localStorage.getItem('token')) {
     alert('Você não esta logado!')
     window.location = '/'
@@ -31,47 +32,28 @@
 
   const filmesContainer = document.querySelector('.filmes-container')
 
-  function formatDuration(minutes) {
-    const horas = Math.floor(minutes / 60)
-    const mins = minutes % 60
-    const segundos = 0
-    return `${String(horas).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`
-  }
-
   async function loadFilmes() {
     const url = '/user/movies'
     const method = 'GET'
     const headers = { 'Authorization': `${localStorage.getItem('token')}` }
     const response = await fetch(url, { method, headers })
-
     const dataResponse = await response.json()
-    if (!response.ok) {
-      console.log(response)
-      console.log(dataResponse)
-      return
-    }
-
+    if (!response.ok) return
     dataResponse.forEach(filme => {
       const card = document.createElement('div')
       const imgBox = document.createElement('div')
       imgBox.className = 'img-filme'
+      imgBox.append(
+        Object.assign(document.createElement('img'), { src: `./img/${filme.title}.jpg` })
+      )
       const filmeInfo = document.createElement('div')
       filmeInfo.className = 'filme-info'
-
-      filmeInfo.append(
-        Object.assign(document.createElement('p'), { innerText: filme.title }),
-        Object.assign(document.createElement('span'), { innerText: formatDuration(filme.duration), className: 'filme-duration' }),
-        Object.assign(document.createElement('span'), { innerText: `Úsuario: ${filme.inserted_by_name}`, className: 'filme-user' })
-      )
-
-
       card.append(imgBox, filmeInfo)
       filmesContainer.appendChild(card)
-
       card.addEventListener('click', () => {
         localStorage.setItem('movieId', filme.id)
         localStorage.setItem('movieName', filme.title)
-        localStorage.setItem('userMovie', filme.inserted_by_name)
+        localStorage.setItem('movieUser', filme.inserted_by_name)
         window.location.href = 'player.html'
       })
     })

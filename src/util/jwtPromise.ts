@@ -21,4 +21,5 @@ export const verify = async (token: string) => {
   })
 }
 
+
 export default { sign, verify }

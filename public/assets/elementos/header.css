@@ -1,21 +1,18 @@
-header {
-	background-color: blueviolet;
-	border-bottom: 2px solid black;
-}
-
 .header {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	padding: 14px 16px;
+	padding: 16px 18px;
 }
 
 .header > a {
 	font-size: 24px;
 	line-height: 28px;
-	color: white;
+	letter-spacing: -1px;
+	font-weight: 800;
+	color: #da0000;
 }
 
 .header div {
@@ -29,16 +26,53 @@ header {
 
 /* ============ header x =========== */
 .header-x {
-	padding: 10px 16px;
+	padding: 12px 18px;
 }
 
-.header-x div a {
+.header-x div a.link {
 	font-size: 16px;
-	padding: 8px 32px;
-	background-color: black;
+	font-weight: bold;
+	padding: 10px 24px;
+	border-radius: 12px;
+	color: white;
 	line-height: 20px;
+	transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.header-x div a:hover {
-	background-color: greenyellow;
+.header-x div a.link:hover {
+	background-color: hsl(0, 0%, 90%);
+	color: black;
+}
+
+.header div a.photo {
+	height: 36px;
+	padding: 2px;
+	border-radius: 12px;
+	user-select: none;
+	cursor: pointer;
+	width: 36px;
+	transition: background-color 0.15s ease, filter 0.15s ease;
+}
+
+.header div a.photo:hover {
+	background-color: hsl(0, 100%, 22%);
+}
+
+.header div a.photo:focus {
+	background-color: hsl(0, 100%, 18%);
+}
+
+.header div a.photo:focus img {
+	filter: brightness(0.94);
+}
+
+.header div a.photo:hover img {
+	filter: brightness(0.98);
+}
+
+.header div a.photo img {
+	object-fit: cover;
+	width: 100%;
+	user-select: none;
+	max-width: 100%;
 }

@@ -1,0 +1,167 @@
+.player-container {
+    display: flex;
+    flex-grow: 1;
+    padding-top: 32px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-container > div {
+    display: flex;
+    max-width: 840px;
+    flex-direction: column;
+}
+
+.video-player {
+    display: flex;
+    max-width: 840px;
+    flex-direction: column;
+}
+
+#movie-player {
+    border-radius: 12px;
+    border: 0;
+}
+
+#movie-title {
+    color: white;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 16px 0 8px 0;
+}
+
+div.movie-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-direction: row;
+    padding: 16px 0;
+}
+
+div.movie-actions button {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    background-color: #272727;
+    color: rgb(241, 241, 241);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+div.movie-actions button:hover {
+    background-color: hsl(0, 0%, 18%);
+    color: hsl(0, 0%, 98%);
+}
+
+div.movie-actions button:active {
+    background-color: hsl(0, 0%, 20%);
+}
+
+div.movie-actions button:last-of-type {
+    margin: 0 0 0 auto;
+}
+
+/* ==================================================================== */
+#movie-details {
+    padding: 18px 18px;
+    border-radius: 12px;
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+    background-color: #272727;
+    border-bottom: 1px solid transparent;
+}
+
+#movie-details p {
+    font-size: 16px;
+    color: white;
+    line-height: 20px;
+}
+
+#comments-section {
+    display: flex;
+    margin-top: 12px;
+    padding: 16px 0;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#comments-section #input-box {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+#comments-section #input-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    background-color: #272727;
+    border: 1px solid hsl(0, 0%, 16%);
+}
+
+#comments-section #input-box input::placeholder {
+    color: hsla(0, 0%, 100%, 0.7);
+}
+
+#comments-section #input-box input:focus, #comments-section #input-box input:hover {
+    outline: 1px solid hsl(0, 0%, 50%);
+}
+
+#comments-section #input-box button {
+    text-align: center;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    background-color: hsl(0, 0%, 90%);
+    font-weight: 600;
+    color: black;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+#comments-section #input-box button:hover {
+    color: white;
+    background-color: hsl(0, 0%, 10%);
+}
+
+#comments-section #input-box button:active {
+    background-color: hsl(0, 0%, 12%);
+}
+
+#comments-list {
+    color: white;
+    display: flex;
+    margin-top: 8px;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#comments-list .comment {
+    padding: 16px 18px 18px 18px;
+    align-items: center;
+    display: flex;
+    border-radius: 12px;
+    align-items: flex-start;
+    background-color: hsl(0, 0%, 12%);
+    flex-direction: column;
+    gap: 12px;
+}
+
+#comments-list .comment :first-child {
+    padding: unset;
+    font-size: 14px;
+    color: hsl(0, 0%, 85%);
+    line-height: 20px;
+}
+
+#comments-list .comment :last-child {
+    font-size: 16px;
+    line-height: 20px;
+}

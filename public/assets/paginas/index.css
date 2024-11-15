@@ -13,7 +13,6 @@
 	max-width: 364px;
 	width: 100%;
 	flex-direction: column;
-	background-color: black;
 }
 
 .login-form form div:not(:last-child) {
@@ -32,7 +31,8 @@
 	width: 100%;
 	padding: 12px 18px;
 	outline: none;
-	color: hsl(0, 0%, 94%);
+	color: black;
+	border-radius: 12px;
 	border: 1px solid #1f1f1f;
 	font-size: 16px;
 	line-height: 20px;
@@ -55,6 +55,7 @@
 
 .login-form form button {
 	cursor: pointer;
+	border-radius: 12px;
 	font-size: 1em;
 	color: #000000;
 	padding: 14px;
